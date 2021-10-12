@@ -1,22 +1,24 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 
-var city;
+// var city = 'adelaide'
 
 // var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
-var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
+// var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
 
 
 
 
 function currentWeather(city) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${adelaide}&units=imperial&appid=${weatherAPI}`
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
     $.ajax({
         url: queryURL,
         method: 'GET',
-    }).then(function(weather) {
+    }).then(function(response) {
         console.log('Ajax Response \n-------------');
         console.log(response);
     });
 
 }
+
+currentWeather('adelaide');
