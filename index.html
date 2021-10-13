@@ -34,20 +34,38 @@
                         <h5> Enter City To Display Weather </h5>
                         <!-- use input group from bootstrap to crate input area to search -->
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Enter City" aria-label="Enter City" aria-describedby="button-addon2">
+                            <input id="newCity" type="text" class="form-control" placeholder="Enter City" aria-label="Enter City" aria-describedby="button-addon2">
                             <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                         </div>
 
                         <div class="row col-12">
                             <ul id="searchResult" class="dataList">
-                                <!-- append li herem li class="datList-item" -->
+                                <!-- append li here li class="datList-item" -->
                             </ul>
                         </div>
                     </div>
 
                 </div>
+                <!-- col-8 as total of 12, and 4 are beinbg used in the id citySearch -->
+                <div class="col-8" id="weatherDisplayData">
+                    <div class="row">
+                        <!-- current weather detials here  -->
+                        <div id="cityDeatils" class="col-12">
+                            <h5> Current Weather</h5>
+                        </div>
 
-                <div class="col-8" id="weatherData"> </div>
+                    </div>
+
+
+
+                    <!-- info for 5 day forcase goes here, id '5DayFor, in css #5DayFor' -->
+                    <div class="row col-12">
+                        <div id="5DayFor"> </div>
+                        <h5> 5 Day Forecast </h5>
+                    </div>
+
+
+                </div>
             </div>
 
         </div>
@@ -57,8 +75,10 @@
 
     </div>
 </body>
+<!-- scripts for JQuery, Bootstrap, Moment, javascript -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="script.js"></script>
 
 </html>
