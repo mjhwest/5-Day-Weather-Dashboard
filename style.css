@@ -23,7 +23,17 @@ li {
 
 #weather-container {
     max-width: 100%;
-    background-color: salmon;
+    background-color: rgb(211, 197, 195);
+    margin: auto;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 20px;
+    height: auto
+}
+
+#forecast-container {
+    max-width: 100%;
+    background-color: rgb(211, 197, 195);
     margin: auto;
     border-radius: 6px;
     padding: 10px;

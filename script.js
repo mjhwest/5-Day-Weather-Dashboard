@@ -1,7 +1,7 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
-var cityDetailContainer = $('#weatherDisplayData');
+var cityDetailContainer = $('#weather-container');
 var searchButton = $('#button-addon2');
-// var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+
 
 let city = '';
 let searchBtn = $('#button-addon2');
@@ -51,24 +51,40 @@ function getData(city) {
             cityDetailContainer.append(cityTemp)
             cityDetailContainer.append(cityHumidity);
             cityDetailContainer.append(cityWind);
+
+            //setting the data for uv index, need lon and lat
+            let lon = data.coord.lon;
+            let lat = data.coord.lat;
+            uvIndexData(lon, lat)
         });
     searchButton.on('click', getData);
 }
 
 
 //function to display UV index: 
-// function uvIndexData(city) 
-//     var uvAPI = `https://api.openweathermap.org/data/2.5/solar_radiation?lat=${lat}&lon=${lon}&appid=${weatherAPI}`
-//     fetch(uvAPI)
-//     .then(function(response) {
-//         return response.json();
-//     })
-//     .then(function(data) {
-//         console.log(data);
-//     })
+function uvIndexData(lon, lat) {
+    var uvAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${weatherAPI}`
+    fetch(uvAPI)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data)
+            console.log(data.current.uvi);
 
-// const lat = data.coord.lat;
-// const lon = data.coord.lon; 
+            //create p element to display UVI
+            const uvi = $("<p>");
+            //set the text 
+            uvi.text('UV Index: ' + data.current.uvi)
+                //append 
+            cityDetailContainer.append(uvi);
+        })
+}
+
+
+
+
+
 
 //Call functions
 // currentWeather('adelaide');
