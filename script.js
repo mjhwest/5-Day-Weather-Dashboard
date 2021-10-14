@@ -1,7 +1,7 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 var cityDetailContainer = $('#weather-container');
 var searchButton = $('#button-addon2');
-
+//need to add DATE in still
 
 let city = '';
 let searchBtn = $('#button-addon2');
@@ -76,14 +76,23 @@ function uvIndexData(lon, lat) {
             const uvi = $("<p>");
             //set the text 
             uvi.text('UV Index: ' + data.current.uvi)
-                //append 
+                //append to correct locatoin
             cityDetailContainer.append(uvi);
         })
 }
 
-
-
-
+//create function for 5 day forecast. 
+function fiveDayForecast(city) {
+    var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherAPI}`
+    fetch(forecast)
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            console.log(data)
+        })
+}
+fiveDayForecast('adelaide');
 
 
 //Call functions

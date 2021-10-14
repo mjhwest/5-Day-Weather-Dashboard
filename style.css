@@ -23,20 +23,26 @@ li {
 
 #weather-container {
     max-width: 100%;
-    background-color: rgb(211, 197, 195);
+    background-color: rgb(245, 241, 240);
     margin: auto;
     border-radius: 6px;
     padding: 10px;
     font-size: 20px;
-    height: auto
+    height: auto;
+    border: 5px solid black;
 }
 
 #forecast-container {
     max-width: 100%;
-    background-color: rgb(211, 197, 195);
+    background-color: rgb(245, 241, 240);
     margin: auto;
     border-radius: 6px;
     padding: 10px;
     font-size: 20px;
-    height: auto
+    height: auto;
+    border: 5px solid black;
+}
+
+#day-forecast {
+    border: 2px solid black;
 }
