@@ -1,6 +1,7 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 var cityDetailContainer = $('#weather-container');
 var searchButton = $('#button-addon2');
+var forecastContainer = $('#day-forecast');
 //need to add DATE in still
 
 let city = '';
@@ -27,7 +28,7 @@ searchBtn.on('click', function() {
 
 //function to display the weather 
 function getData(city) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
+    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPI}`
     fetch(queryURL)
         .then(function(response) {
             return response.json();
@@ -56,6 +57,8 @@ function getData(city) {
             let lon = data.coord.lon;
             let lat = data.coord.lat;
             uvIndexData(lon, lat)
+
+
         });
     searchButton.on('click', getData);
 }
@@ -83,13 +86,27 @@ function uvIndexData(lon, lat) {
 
 //create function for 5 day forecast. 
 function fiveDayForecast(city) {
-    var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherAPI}`
+    var forecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${weatherAPI}`
     fetch(forecast)
         .then(function(response) {
             return response.json();
         })
         .then(function(data) {
             console.log(data)
+            for (i = 0; i < 5; i++) {
+                //create p elements for displaying forecast data
+                const forecastTemp = $("<p>");
+                const forecastWind = $("<p>");
+                const forecastHumidity = $("<p>");
+                //setting the text and data 
+                forecastTemp.text(data[i].list.main.temp);
+                forecastHumidity.text(data[i].list.main.humidity);
+                forecastWind.text(data[i].list.main.wind.speed);
+                //dynamically append html
+                forecastContainer.append(forecastTemp)
+                forecastContainer.append(forecastWind)
+                forecastContainer.append(forecastHumidity)
+            }
         })
 }
 fiveDayForecast('adelaide');
