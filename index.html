@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- creare fluid container using bootstrap. Its a full width container, spanning the entier width of viewport, create addiotnal containers inside container-fluid -->
+    <!-- Nav Bar Section -->
     <div class="container-fluid">
         <nav class="navbar navbar-light bg-skyblue">
             <div class="container-fluid">
@@ -21,18 +21,15 @@
             </div>
         </nav>
 
-       
-        <!-- each row will be made up of 3 colums, time of day, text area to fill in event and save button -->
+        <!-- main container for holding everything  -->
         <div class="container">
             <div class="row">
-                <!-- create 2 seperate col, one for the citySearch and one to display the weatherData using the API  -->
+                <!-- search row, 4 col wide  -->
                 <div class="col-4" id="citySearch">
-                    <!-- This col needs 3 seperate rows: 1) A heading, which city do you wana look up. 2) input field to search for city using the API. 3) an area to append the city searched too    -->
-                    <div class= "row"></div>
                     <div class="row col-12">
                         <h5> Enter City To Display Weather </h5>
 
-                    
+
                         <!-- use input group from bootstrap to crate input area to search -->
                         <div class="input-group mb-3">
                             <input id="newCity" type="text" class="form-control" placeholder="Enter City" aria-label="Enter City" aria-describedby="button-addon2">
@@ -47,24 +44,45 @@
                     </div>
 
                 </div>
+
+
+                <!-- NEXT SECTION HERE, DISPLAY THE WEAHTER FOR SEARCH CITY AND 5 DAY FORECAST.  -->
+
                 <!-- col-8 as total of 12, and 4 are beinbg used in the id citySearch -->
-               
-                <div class="col-8" id="weatherDisplayData">
-                    <div class="row">
-                        <!-- current weather detials here  -->
+
+                <div id="weatherDisplayData" class=" col-8">
+                    <div id="weather-container">
+                        <div class="row">
+                            <!-- current weather detials here  -->
                             <h5> Currently In </h5>
-                            <div id="cityDeatils" class="col-12">
+                            <div id="cityDeatils" class="col-12"> </div>
                         </div>
                     </div>
 
-             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <!-- info for 5 day forcase goes here, id '5DayFor, in css #5DayFor' -->
-                    <div class="row col-12">
+                    <!-- <div class="row col-12">
                         <div id="5DayFor"> </div>
                         <h5> 5 Day Forecast </h5>
-                    </div>
-                </div> 
+                    </div> -->
+                </div>
             </div>
         </div>
     </div>

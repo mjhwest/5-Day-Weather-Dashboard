@@ -1,7 +1,7 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 var cityDetailContainer = $('#weatherDisplayData');
 var searchButton = $('#button-addon2');
-
+// var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
 
 let city = '';
 let searchBtn = $('#button-addon2');
@@ -10,22 +10,20 @@ searchBtn.on('click', function() {
     getData(city)
 })
 
-
 //function to get the current weather for a city 
-function currentWeather(city) {
-    var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
-    $.ajax({
-        url: queryURL,
-        method: 'GET',
-    }).then(function(currentCityWeather) {
-        console.log(currentCityWeather);
+// function currentWeather(city) {
+//     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${weatherAPI}`
+//     $.ajax({
+//         url: queryURL,
+//         method: 'GET',
+//     }).then(function(currentCityWeather) {
+//         console.log(currentCityWeather);
 
-     $('#weatherDisplayData').css("display", "block");
-     $('#cityDeails').empty();
+//         $('#weatherDisplayData').css("display", "block");
+//         $('#cityDeails').empty();
 
-    });
-}
-
+//     });
+// }
 
 //function to display the weather 
 function getData(city) {
@@ -54,7 +52,7 @@ function getData(city) {
             cityDetailContainer.append(cityHumidity);
             cityDetailContainer.append(cityWind);
         });
-        searchButton.on('click', getData);
+    searchButton.on('click', getData);
 }
 
 
@@ -71,7 +69,6 @@ function getData(city) {
 
 // const lat = data.coord.lat;
 // const lon = data.coord.lon; 
-
 
 //Call functions
 // currentWeather('adelaide');

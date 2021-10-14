@@ -20,3 +20,13 @@ p {
 li {
     color: #4D4F53!important;
 }
+
+#weather-container {
+    max-width: 100%;
+    background-color: salmon;
+    margin: auto;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 20px;
+    height: auto
+}
