@@ -99,23 +99,7 @@ function fiveDayForecast(city) {
                 if (dayData.dt_txt.includes("15:00")) {
                     console.log(data.list[i].dt_txt)
                 }
-
-
             }
-            // for (i = 0; i < 5; i++) {
-            //create p elements for displaying forecast data
-            // const forecastTemp = $("<p>");
-            // const forecastWind = $("<p>");
-            // const forecastHumidity = $("<p>");
-            // //setting the text and data 
-            // forecastTemp.text(data[i].list.main.temp);
-            // forecastHumidity.text(data[i].list.main.humidity);
-            // forecastWind.text(data[i].list.main.wind.speed);
-            // //dynamically append html
-            // forecastContainer.append(forecastTemp)
-            // forecastContainer.append(forecastWind)
-            // forecastContainer.append(forecastHumidity)
-            // }
         })
 }
 fiveDayForecast('adelaide');
