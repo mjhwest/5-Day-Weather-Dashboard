@@ -46,3 +46,35 @@ li {
 #day-forecast {
     border: 2px solid black;
 }
+
+
+/* //added index class // */
+
+
+/* uv index div */
+
+.index-scale {
+    width: 150px;
+    height: 20px;
+    border-radius: 6px;
+}
+
+.index-scale.low {
+    background-color: #8DC443;
+}
+
+.index-scale.medium {
+    background-color: #FDD836;
+}
+
+.index-scale.high {
+    background-color: #FEB301;
+}
+
+.index-scale.very-high {
+    background-color: #D2394A;
+}
+
+.index-scale.dangerous {
+    background-color: #955072;
+}

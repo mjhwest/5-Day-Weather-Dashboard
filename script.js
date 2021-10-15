@@ -35,7 +35,6 @@ function getData(city) {
         })
         .then(function(data) {
             console.log(data);
-
             //create h3 element for city name an p elements for displaying info 
             const cityName = $("<h3>");
             const cityTemp = $("<p>");
@@ -52,17 +51,14 @@ function getData(city) {
             cityDetailContainer.append(cityTemp)
             cityDetailContainer.append(cityHumidity);
             cityDetailContainer.append(cityWind);
-
             //setting the data for uv index, need lon and lat
             let lon = data.coord.lon;
             let lat = data.coord.lat;
             uvIndexData(lon, lat)
 
-
         });
     searchButton.on('click', getData);
 }
-
 
 //function to display UV index: 
 function uvIndexData(lon, lat) {
@@ -77,10 +73,35 @@ function uvIndexData(lon, lat) {
 
             //create p element to display UVI
             const uvi = $("<p>");
-            //set the text 
+            //apply .index-scale to UV index 
+            var uvScale = $("<div class='index-scale'>")
+                //set the text 
             uvi.text('UV Index: ' + data.current.uvi)
                 //append to correct locatoin
             cityDetailContainer.append(uvi);
+
+
+
+
+
+            // If statement to check the uv index and colour the indicator accordingly
+            if (data.current.uvi <= 2) {
+                // console.log('low')
+                uvScale.addClass('low');
+            } else if (data.current.uvi > 2 && data.current.uvi <= 5) {
+                // console.log('medium')
+                uvScale.addClass('medium');
+            } else if (data.current.uvi > 5 && data.current.uvi <= 7) {
+                // console.log('high')
+                uvScale.addClass('high')
+            } else if (data.current.uvi > 7 && data.current.uvi <= 10) {
+                // console.log('very-high')
+                uvScale.addClass('very-high')
+            } else {
+                // console.log('dangerous')
+                uvScale.addClass('dangerous')
+            }
+            uvi.after(uvScale);
         })
 }
 
