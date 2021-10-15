@@ -55,26 +55,26 @@ li {
 
 .index-scale {
     width: 150px;
-    height: 20px;
+    height: 30px;
     border-radius: 6px;
 }
 
-.index-scale.low {
+.index-scale .low {
     background-color: #8DC443;
 }
 
-.index-scale.medium {
+.index-scale .medium {
     background-color: #FDD836;
 }
 
-.index-scale.high {
+.index-scale .high {
     background-color: #FEB301;
 }
 
-.index-scale.very-high {
+.index-scale .very-high {
     background-color: #D2394A;
 }
 
-.index-scale.dangerous {
+.index-scale .dangerous {
     background-color: #955072;
 }

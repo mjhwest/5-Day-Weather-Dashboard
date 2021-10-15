@@ -44,7 +44,7 @@ function getData(city) {
             cityName.text(data.name)
             cityTemp.text('Tempterature: ' + data.main.temp + 'C')
             cityHumidity.text('Humidity: ' + data.main.humidity + '%')
-            cityWind.text('Wind Speed: ' + data.wind.speed + 'Km/h')
+            cityWind.text('Wind Speed: ' + data.wind.speed + 'm/s')
                 //Appending the dynamically generated html to the div associated with the id="users"
                 //Append will attach the element as the bottom most child.
             cityDetailContainer.append(cityName);
@@ -71,37 +71,38 @@ function uvIndexData(lon, lat) {
             console.log(data)
             console.log(data.current.uvi);
 
+            //to get the <p> to just be the color need to do below 
+            //ok for that youll want to wrap the actual value in a span inside the p and add the background to the span not the div // 
             //create p element to display UVI
-            const uvi = $("<p>");
-            //apply .index-scale to UV index 
+
+            const uvi = $('<p>UV Index:</p>')
+                // const uvi = $("<p>");
+            const span = $('<span>' + data.current.uvi + '</span>')
+                //apply .index-scale to UV index......i want the uvScale to cover the uvi text
             var uvScale = $("<div class='index-scale'>")
-                //set the text 
-            uvi.text('UV Index: ' + data.current.uvi)
                 //append to correct locatoin
             cityDetailContainer.append(uvi);
-
-
-
-
 
             // If statement to check the uv index and colour the indicator accordingly
             if (data.current.uvi <= 2) {
                 // console.log('low')
-                uvScale.addClass('low');
+                span.addClass('low');
             } else if (data.current.uvi > 2 && data.current.uvi <= 5) {
                 // console.log('medium')
-                uvScale.addClass('medium');
+                span.addClass('medium');
             } else if (data.current.uvi > 5 && data.current.uvi <= 7) {
                 // console.log('high')
-                uvScale.addClass('high')
+                span.addClass('high')
             } else if (data.current.uvi > 7 && data.current.uvi <= 10) {
                 // console.log('very-high')
-                uvScale.addClass('very-high')
+                span.addClass('very-high')
             } else {
                 // console.log('dangerous')
-                uvScale.addClass('dangerous')
+                span.addClass('dangerous')
             }
-            uvi.after(uvScale);
+            uvi.append(span);
+            uvScale.append(uvi);
+            cityDetailContainer.append(uvScale)
         })
 }
 
