@@ -4,12 +4,12 @@ var searchButton = $('#button-addon2');
 var forecastContainer = $('#day-forecast');
 //need to add DATE in still
 
-let city = '';
-let searchBtn = $('#button-addon2');
-searchBtn.on('click', function() {
-    let city = $('#newCity').val().toLowerCase();
-    getData(city)
-})
+// let city = '';
+// let searchBtn = $('#button-addon2');
+// searchBtn.on('click', function() {
+//     let city = $('#newCity').val().toLowerCase();
+//     getData(city)
+// })
 
 //function to get the current weather for a city 
 // function currentWeather(city) {
@@ -27,6 +27,9 @@ searchBtn.on('click', function() {
 // }
 
 //function to display the weather 
+
+
+
 function getData(city) {
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPI}`
     fetch(queryURL)
@@ -44,7 +47,7 @@ function getData(city) {
             cityName.text(data.name)
             cityTemp.text('Tempterature: ' + data.main.temp + 'C')
             cityHumidity.text('Humidity: ' + data.main.humidity + '%')
-            cityWind.text('Wind Speed: ' + data.wind.speed + 'm/s')
+            cityWind.text('Wind Speed: ' + data.wind.speed + 'Km/h')
                 //Appending the dynamically generated html to the div associated with the id="users"
                 //Append will attach the element as the bottom most child.
             cityDetailContainer.append(cityName);
@@ -55,6 +58,12 @@ function getData(city) {
             let lon = data.coord.lon;
             let lat = data.coord.lat;
             uvIndexData(lon, lat)
+
+            //creating variable so that todays date is included in displayed data with cityName
+            let todayDate = moment().format("dddd, MMMM Do YYYY");
+            console.log(todayDate)
+
+            cityName.append(': ' + todayDate)
 
         });
     searchButton.on('click', getData);
@@ -74,10 +83,9 @@ function uvIndexData(lon, lat) {
             //to get the <p> to just be the color need to do below 
             //ok for that youll want to wrap the actual value in a span inside the p and add the background to the span not the div // 
             //create p element to display UVI
-
             const uvi = $('<p>UV Index:</p>')
-                // const uvi = $("<p>");
-            const span = $('<span>' + data.current.uvi + '</span>')
+                // const span, target text into a string, math.floor rounds uvindex to single figure.
+            const span = $('<span>' + Math.round(data.current.uvi) + '</span>')
                 //apply .index-scale to UV index......i want the uvScale to cover the uvi text
             var uvScale = $("<div class='index-scale'>")
                 //append to correct locatoin
@@ -116,17 +124,36 @@ function fiveDayForecast(city) {
         .then(function(data) {
             console.log(data)
 
+            let count = 0; // start a count to increment with each forecast day
             for (var i = 0; i < data.list.length; i++) {
                 var dayData = data.list[i]
                 if (dayData.dt_txt.includes("15:00")) {
-                    console.log(data.list[i].dt_txt)
+
+                    count++; //increment counter 
+                    // create each section to append daily weather details
+                    let weatherCol = $(`
+                        <div class="col" id="day-forecast">
+                            <h4>Day ${count} of Forecast</h4>
+                            <p><strong>Temperature: ${dayData.main.temp}</p>
+                            <p><strong>Humidity:</strong> ${dayData.main.humidity}</p>
+                            <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
+                        </div>
+                    `);
+                    $('.weather').append(weatherCol); // Append weather div to weather row
                 }
             }
         })
 }
-fiveDayForecast('adelaide');
 
+// run each function on button click
+let searchBtn = $('#button-addon2');
+searchBtn.on('click', function() {
+    let city = $('#newCity').val().toLowerCase();
+    fiveDayForecast(city)
+    getData(city);
+})
 
+// fiveDayForecast('adelaide');
 //Call functions
 // currentWeather('adelaide');
 // getData();
