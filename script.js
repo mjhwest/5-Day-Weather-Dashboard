@@ -60,11 +60,34 @@ function getData(city) {
             uvIndexData(lon, lat)
 
             //creating variable so that todays date is included in displayed data with cityName
-            let todayDate = moment().format("dddd, MMMM Do YYYY");
-            console.log(todayDate)
+            // let todayDate = moment().format("dddd, MMMM Do YYYY");
+            // console.log(todayDate)
 
-            cityName.append(': ' + todayDate)
+            // cityName.append(': ' + todayDate)
 
+            //getting the date from unixTime
+            // let unixTime = data.dt
+            // let date = new Date (unixTime*1000)
+            // console.log(date.toLocaleString("en-US"));
+
+
+            //creating variable so that todays date is included in displayed data with cityName
+            // undo to here 
+            // let todayDate = moment().format("dddd, MMMM Do YYYY");
+            // console.log(todayDate)
+            // cityName.append(': ' + todayDate)
+
+            //test 
+            // var timestamp = 1634276373
+            // var date = new Date(timestamp);
+            // console.log(date.getTime())
+            // console.log(date)
+
+            //creating date for each city search based on 'dt' data 
+
+            const dayDate = moment.unix(data.dt).format("dddd, MMMM Do YYYY")
+            console.log(dayDate)
+            cityName.append(': ' + dayDate)
         });
     searchButton.on('click', getData);
 }
@@ -79,7 +102,6 @@ function uvIndexData(lon, lat) {
         .then(function(data) {
             console.log(data)
             console.log(data.current.uvi);
-
             //to get the <p> to just be the color need to do below 
             //ok for that youll want to wrap the actual value in a span inside the p and add the background to the span not the div // 
             //create p element to display UVI
@@ -127,23 +149,33 @@ function fiveDayForecast(city) {
             let count = 0; // start a count to increment with each forecast day
             for (var i = 0; i < data.list.length; i++) {
                 var dayData = data.list[i]
+                var unixDate = moment.unix(dayData.dt).format("dddd, MMMM Do YYYY")
+                console.log(unixDate)
                 if (dayData.dt_txt.includes("15:00")) {
+                    console.log(dayData.dt_txt)
 
-                    count++; //increment counter 
+
+                    // count++; //increment counter 
                     // create each section to append daily weather details
                     let weatherCol = $(`
                         <div class="col" id="day-forecast">
-                            <h4>Day ${count} of Forecast</h4>
+                            <h4><strong> ${dayData.main.dt}</strong></h4>
                             <p><strong>Temperature: ${dayData.main.temp}</p>
                             <p><strong>Humidity:</strong> ${dayData.main.humidity}</p>
                             <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
                         </div>
                     `);
+
                     $('.weather').append(weatherCol); // Append weather div to weather row
                 }
             }
         })
 }
+
+
+// const dayDate = moment.unix(data.dt).format("dddd, MMMM Do YYYY")
+// console.log(dayDate)
+// cityName.append(': ' + dayDate)
 
 // run each function on button click
 let searchBtn = $('#button-addon2');
