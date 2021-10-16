@@ -44,7 +44,7 @@ function getData(city) {
             const cityHumidity = $("<p>");
             const cityWind = $("<p>");
             //setting the text of h3 and p
-            cityName.text(data.name)
+            cityName.text('Currently in ' + data.name)
             cityTemp.text('Tempterature: ' + data.main.temp + 'C')
             cityHumidity.text('Humidity: ' + data.main.humidity + '%')
             cityWind.text('Wind Speed: ' + data.wind.speed + 'Km/h')
@@ -145,24 +145,22 @@ function fiveDayForecast(city) {
         })
         .then(function(data) {
             console.log(data)
-
             let count = 0; // start a count to increment with each forecast day
             for (var i = 0; i < data.list.length; i++) {
                 var dayData = data.list[i]
-                var unixDate = moment.unix(dayData.dt).format("dddd, MMMM Do YYYY")
-                console.log(unixDate)
-                if (dayData.dt_txt.includes("15:00")) {
+                if (dayData.dt_txt.includes("03:00")) {
                     console.log(dayData.dt_txt)
-
-
-                    // count++; //increment counter 
-                    // create each section to append daily weather details
+                    var unixDate = moment.unix(dayData.dt).utc().format("dddd, MMMM Do YYYY")
+                    console.log(unixDate)
+                        // count++; //increment counter 
+                        // create each section to append daily weather details
                     let weatherCol = $(`
                         <div class="col" id="day-forecast">
-                            <h4><strong> ${dayData.main.dt}</strong></h4>
+                            <h4><strong> ${unixDate}</strong></h4>
                             <p><strong>Temperature: ${dayData.main.temp}</p>
                             <p><strong>Humidity:</strong> ${dayData.main.humidity}</p>
                             <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
+                            <p> ${dayData.weather.icon}</p>
                         </div>
                     `);
 
