@@ -38,6 +38,18 @@ function getData(city) {
         })
         .then(function(data) {
             console.log(data);
+
+            //THIS IS NOT WORKING
+            // let currentCol = $(`
+            // <div class = "col" id="day-weather">
+            // <h3><strong>${data.name}</strong></h3>
+            // <p><strong>Temperature:</strong> ${data.main.temp}</p>
+            // <p><strong> Humidity: </strong> ${data.main.humidity}</p>
+            // <p><strong> Wind Speed: </strong> ${data.wind.speed}</p>
+            // </div>
+            // `);
+            // $('.current').append(currentCol); // Append current weather div to current row
+
             //create h3 element for city name an p elements for displaying info 
             const cityName = $("<h3>");
             const cityTemp = $("<p>");
@@ -58,36 +70,16 @@ function getData(city) {
             let lon = data.coord.lon;
             let lat = data.coord.lat;
             uvIndexData(lon, lat)
-
-            //creating variable so that todays date is included in displayed data with cityName
-            // let todayDate = moment().format("dddd, MMMM Do YYYY");
-            // console.log(todayDate)
-
-            // cityName.append(': ' + todayDate)
-
-            //getting the date from unixTime
-            // let unixTime = data.dt
-            // let date = new Date (unixTime*1000)
-            // console.log(date.toLocaleString("en-US"));
-
-
-            //creating variable so that todays date is included in displayed data with cityName
-            // undo to here 
-            // let todayDate = moment().format("dddd, MMMM Do YYYY");
-            // console.log(todayDate)
-            // cityName.append(': ' + todayDate)
-
-            //test 
-            // var timestamp = 1634276373
-            // var date = new Date(timestamp);
-            // console.log(date.getTime())
-            // console.log(date)
-
-            //creating date for each city search based on 'dt' data 
-
+                //setting the date using unix
             const dayDate = moment.unix(data.dt).format("dddd, MMMM Do YYYY")
             console.log(dayDate)
             cityName.append(': ' + dayDate)
+                //creating variable to display current weather icon
+            var iconCode = data.weather[0].icon;
+            var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+            cityName.after(`<img src="${iconURL}" class"icon-img" alt="icon image">`)
+
+
         });
     searchButton.on('click', getData);
 }
@@ -152,23 +144,25 @@ function fiveDayForecast(city) {
                     console.log(dayData.dt_txt)
                     var unixDate = moment.unix(dayData.dt).utc().format("dddd, MMMM Do YYYY")
                     console.log(unixDate)
-                        // count++; //increment counter 
-                        // create each section to append daily weather details
+                    var iconCode = dayData.weather[0].icon;
+                    var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
+
+                    // count++; //increment counter 
+                    // create each section to append daily weather details
                     let weatherCol = $(`
                         <div class="col" id="day-forecast">
-                            <h4><strong> ${unixDate}</strong></h4>
+                            <h4><strong> ${unixDate}</strong> <img src = "${iconURL}" class ="icon-ig" alt = "weahter-icon"></h4> 
                             <p><strong>Temperature: ${dayData.main.temp}</p>
                             <p><strong>Humidity:</strong> ${dayData.main.humidity}</p>
                             <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
-                            <p> ${dayData.weather.icon}</p>
                         </div>
                     `);
-
                     $('.weather').append(weatherCol); // Append weather div to weather row
                 }
             }
         })
 }
+
 
 
 // const dayDate = moment.unix(data.dt).format("dddd, MMMM Do YYYY")
