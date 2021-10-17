@@ -1,5 +1,4 @@
-// var weatherAPI = "81bba03d80a285cb4521ac469ecbb174"; re use this key tomorrow, currently over limit
-var weatherAPI = "9e0ede6ed9dad7c9f716f87588160be2";
+var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 var cityDetailContainer = $('#weather-container');
 var searchButton = $('#button-addon2');
 var forecastContainer = $('#day-forecast');
@@ -16,8 +15,10 @@ searchButton.on('click', function() {
     console.log(city)
     storeCityHistory(cityList);
     $('#searchResult').append(`<li class ="searched" > ${cityList}</li>`)
+
 })
 
+//create function to get  API data for any city
 
 function getData(city) {
     var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${weatherAPI}`
@@ -28,17 +29,6 @@ function getData(city) {
         })
         .then(function(data) {
             console.log(data);
-            //THIS IS NOT WORKING
-            // let currentCol = $(`
-            // <div class = "col" id="day-weather">
-            // <h3><strong>${data.name}</strong></h3>
-            // <p><strong>Temperature:</strong> ${data.main.temp}</p>
-            // <p><strong> Humidity: </strong> ${data.main.humidity}</p>
-            // <p><strong> Wind Speed: </strong> ${data.wind.speed}</p>
-            // </div>
-            // `);
-            // $('.current').append(currentCol); // Append current weather div to current row
-
 
             if ($('.main').length == 0) { //if class=main dosent exist append data 
                 //create h3 element for city name an p elements for displaying info 
@@ -58,12 +48,14 @@ function getData(city) {
                 cityDetailContainer.append(cityHumidity);
                 cityDetailContainer.append(cityWind);
 
+                //assigning lon and lat with data
                 let lon = data.coord.lon;
                 let lat = data.coord.lat;
-                // uvIndexData(lon, lat)
+                uvIndexData(lon, lat)
 
 
-                //setting the date using unix
+
+                //setting the date using unix and moment method
                 const dayDate = moment.unix(data.dt).format("dddd, MMMM Do YYYY")
                 console.log(dayDate)
 
@@ -72,10 +64,12 @@ function getData(city) {
                 var iconCode = data.weather[0].icon;
                 var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
 
+                //append dated next to city name 
                 cityName.append(': ' + dayDate)
+
+                //append icon under city name
                 cityName.after(`<img src="${iconURL}" class"icon-img" alt="icon image">`)
-                uvIndexData(lon, lat)
-                    // console.log('does exist')
+
             } else { //if it does exist, 
                 cityDetailContainer.empty();
                 getData(city)
@@ -85,7 +79,7 @@ function getData(city) {
         });
 }
 
-//function to display UV index: 
+//function to display UV index based on Lon and lat data
 function uvIndexData(lon, lat) {
     var uvAPI = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${weatherAPI}`
     fetch(uvAPI)
@@ -96,7 +90,7 @@ function uvIndexData(lon, lat) {
             console.log(data)
             console.log(data.current.uvi);
             //create p element to display UVI
-            const uvi = $('<p>UV Index:</p>')
+            const uvi = $('<p>UV Index: </p>')
                 // const span, target text into a string, math.floor rounds uvindex to single figure.
             const span = $('<span>' + Math.round(data.current.uvi) + '</span>')
                 //apply .index-scale to UV index......i want the uvScale to cover the uvi text
@@ -136,15 +130,20 @@ function fiveDayForecast(city) {
         })
         .then(function(data) {
             console.log(data)
-                // let count = 0; // start a count to increment with each forecast day
 
+            //if statment for 5 day forecast
             if ($('#day-forecast').length == 0) {
+                //fir loop to go through all the data
                 for (var i = 0; i < data.list.length; i++) {
+                    //defining data.list as dayData
                     var dayData = data.list[i]
+                        //searching dayData, specifically dt_txt for 03:00, and if its there include it.
                     if (dayData.dt_txt.includes("03:00")) {
                         console.log(dayData.dt_txt)
+                            //applying the date 
                         var unixDate = moment.unix(dayData.dt).utc().format("dddd, MMMM Do YYYY")
                         console.log(unixDate)
+                            //applying the weather icon 
                         var iconCode = dayData.weather[0].icon;
                         var iconURL = `http://openweathermap.org/img/w/${iconCode}.png`;
 
@@ -157,11 +156,13 @@ function fiveDayForecast(city) {
                                 <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
                             </div>
                         `);
-                        $('.weather').append(weatherCol);
                         // Append weather div to weather row
+                        $('.weather').append(weatherCol);
+
                     }
-                }
+                } //setting text for forecast 
                 let forecastText = "<h2> Five Day Forecast </h2>"
+                    //prepend, put its before the .weather
                 $('.weather').prepend(forecastText);
             } else {
                 $('.weather').empty();
@@ -203,8 +204,7 @@ addSearch();
 
 
 
-//create function to hide weather containers unless clicked on 
-//create function to remove old weather and replace with new search result 
+//create function to remove old weather and display with new search result or stored search
 function displayOld() {
     var oldResults = $('.searched')
     oldResults.each(function(index, result) {
