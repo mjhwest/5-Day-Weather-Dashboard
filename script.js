@@ -9,13 +9,17 @@ var searchLog = []; //not sure if needed
 // run each function on button click
 searchButton.on('click', function() {
     let city = $('#newCity').val().toLowerCase();
+    if (!city) {
+        return
+    }
     let cityList = city.charAt(0).toUpperCase() + city.slice(1);
     fiveDayForecast(city)
     getData(city);
     console.log(city)
     storeCityHistory(cityList);
     $('#searchResult').append(`<li class ="searched" > ${cityList}</li>`)
-    $('.weather-container').removeClass("hide");
+    $('#weather-container').removeClass("hide");
+    $('#forecast-container').removeClass("hide");
 
 
 })
@@ -213,6 +217,8 @@ function displayOld() {
     var oldResults = $('.searched')
     oldResults.each(function(index, result) {
         $(this).on('click', function() {
+            $('#weather-container').removeClass("hide");
+            $('#forecast-container').removeClass("hide");
             var city = $(this).text()
             getData(city)
             fiveDayForecast(city)

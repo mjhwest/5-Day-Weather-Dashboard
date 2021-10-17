@@ -83,15 +83,22 @@ li {
     background-color: #955072;
 }
 
+
+/* CSS for searched cities  */
+
 .searched {
     width: auto;
     padding: 8px 10px;
     background-color: burlywood;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 20px;
     text-align: center;
 }
 
 .hide {
     display: none;
+}
+
+body {
+    background-color: cornsilk;
 }
