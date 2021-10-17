@@ -44,7 +44,7 @@ function getData(city) {
                 let cityWind = $("<p>");
                 //setting the text of h3 and p
                 cityName.text('Currently in ' + data.name)
-                cityTemp.text('Tempterature: ' + data.main.temp + 'C')
+                cityTemp.text('Tempterature: ' + data.main.temp + ' ℃')
                 console.log(cityTemp.text())
                 cityHumidity.text('Humidity: ' + data.main.humidity + '%')
                 cityWind.text('Wind Speed: ' + data.wind.speed + 'Km/h')
@@ -147,7 +147,7 @@ function fiveDayForecast(city) {
                     if (dayData.dt_txt.includes("03:00")) {
                         console.log(dayData.dt_txt)
                             //applying the date 
-                        var unixDate = moment.unix(dayData.dt).utc().format("dddd, MMMM Do YYYY")
+                        var unixDate = moment.unix(dayData.dt).utc().format("MMM Do YYYY")
                         console.log(unixDate)
                             //applying the weather icon 
                         var iconCode = dayData.weather[0].icon;
@@ -155,16 +155,15 @@ function fiveDayForecast(city) {
 
                         // create each section to append daily weather details
                         let weatherCol = $(`
-                            <div class="col mx-3" id="day-forecast">
+                            <div class="col mx-2" id="day-forecast">
                                 <h4><strong> ${unixDate}</strong> <img src = "${iconURL}" class ="icon-ig" alt = "weahter-icon"></h4> 
-                                <p><strong>Temperature: ${dayData.main.temp}</p>
-                                <p><strong>Humidity:</strong> ${dayData.main.humidity}</p>
-                                <p><strong>Wind Speed:</strong> ${dayData.wind.speed}</p>
+                                <p><strong>Temperature: ${dayData.main.temp}  ℃ </p>
+                                <p><strong>Humidity: ${dayData.main.humidity}%</strong></p>
+                                <p><strong>Wind Speed:</strong> ${dayData.wind.speed} m/s </strong></p>
                             </div>
                         `);
                         // Append weather div to weather row
                         $('.weather').append(weatherCol);
-
                     }
                 } //setting text for forecast 
                 let forecastText = "<h2> Five Day Forecast </h2>"
@@ -176,9 +175,6 @@ function fiveDayForecast(city) {
             }
         })
 }
-
-
-//COMMENTS DONE TO HERE
 
 //function to store city search in local storage. 
 function storeCityHistory(data) {
@@ -194,17 +190,20 @@ function storeCityHistory(data) {
 
 //create function to render to #search-result 
 function addSearch() {
+    //get data out of localStorage 
     var local = localStorage.getItem('city')
     if (local === null) local = '';
+    //split the array 
     var localArray = local.split(', ');
 
+    //loop, search length of array, if nothing, hide
     for (var i = 0; i < localArray.length; i++) {
         if (localArray[i] == '') {
             $('.searched').addClass('hide')
+                //else append 
         } else {
             $('#searchResult').append(`<li class ="searched" > ${localArray[i]}</li>`)
         }
-
     }
 }
 addSearch();
@@ -212,13 +211,15 @@ addSearch();
 
 
 
-//create function to remove old weather and display with new search result or stored search
+//create function to display previously searched weather
 function displayOld() {
     var oldResults = $('.searched')
     oldResults.each(function(index, result) {
         $(this).on('click', function() {
+            //remove the hide class for containers, so data can be displayed without needing to push search
             $('#weather-container').removeClass("hide");
             $('#forecast-container').removeClass("hide");
+            //get contents of getData(city) and fiveDayForecast(city)
             var city = $(this).text()
             getData(city)
             fiveDayForecast(city)
@@ -228,5 +229,4 @@ function displayOld() {
 
     })
 }
-
 displayOld();
