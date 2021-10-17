@@ -31,7 +31,7 @@ li {
     height: auto;
     border: 5px solid black;
     font-weight: bold;
-    display: hide;
+    /* display: hide; */
 }
 
 #forecast-container {
@@ -43,7 +43,8 @@ li {
     font-size: 20px;
     height: auto;
     border: 5px solid black;
-    display: hide;
+    /* display: hide; */
+    margin-top: 20px;
 }
 
 #day-forecast {

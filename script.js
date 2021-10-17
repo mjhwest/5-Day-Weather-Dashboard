@@ -1,7 +1,7 @@
 var weatherAPI = "81bba03d80a285cb4521ac469ecbb174";
 var cityDetailContainer = $('#weather-container');
 var searchButton = $('#button-addon2');
-var forecastContainer = $('#day-forecast');
+// var forecastContainer = $('#day-forecast');
 var citySearch = $('#newCity')
 
 var searchLog = []; //not sure if needed 
@@ -15,6 +15,8 @@ searchButton.on('click', function() {
     console.log(city)
     storeCityHistory(cityList);
     $('#searchResult').append(`<li class ="searched" > ${cityList}</li>`)
+    $('.weather-container').removeClass("hide");
+
 
 })
 
@@ -171,6 +173,8 @@ function fiveDayForecast(city) {
         })
 }
 
+
+//COMMENTS DONE TO HERE
 
 //function to store city search in local storage. 
 function storeCityHistory(data) {
