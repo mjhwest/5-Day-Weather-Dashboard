@@ -1,28 +1,23 @@
-/* .bg-skyblue {
-    background-color: skyblue;
-} */
-
 .nav-font {
     font-size: 70px;
     margin: auto;
     color: black;
-    font-family: 'Arvo', serif;
-    ;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 p {
-    /* font-family: 'Arvo', serif; */
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
 }
 
 h2 {
-    font-family: 'Arvo', serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: center;
 }
 
 h3 {
-    font-family: 'Arvo', serif;
+    font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
@@ -68,9 +63,13 @@ li {
     font-family: 'Arvo', serif;
 }
 
+
+/* color and border for forecast */
+
 #day-forecast {
     border: 2px solid black;
     background-color: #F4E5DB;
+    opacity: 77%;
 }
 
 
@@ -111,7 +110,6 @@ li {
 .searched {
     width: auto;
     padding: 8px 10px;
-    background-color: burlywood;
     cursor: pointer;
     border-radius: 20px;
     text-align: center;
@@ -121,11 +119,17 @@ li {
     display: none;
 }
 
+
+/* background image */
+
 body {
     background-image: url(../images/country.jpg);
     background-size: cover;
     background-position: center;
 }
+
+
+/* properties for search */
 
 #button-addon2 {
     background-color: white;

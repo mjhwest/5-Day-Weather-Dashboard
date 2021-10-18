@@ -47,7 +47,7 @@ function getData(city) {
                 cityTemp.text('Tempterature: ' + data.main.temp + ' ℃')
                 console.log(cityTemp.text())
                 cityHumidity.text('Humidity: ' + data.main.humidity + '%')
-                cityWind.text('Wind Speed: ' + data.wind.speed + 'Km/h')
+                cityWind.text('Wind Speed: ' + data.wind.speed + 'm/s')
                     //dynamically appending text
                 cityDetailContainer.append(cityName);
                 cityDetailContainer.append(cityTemp)
@@ -157,9 +157,9 @@ function fiveDayForecast(city) {
                         let weatherCol = $(`
                             <div class="col mx-2" id="day-forecast">
                                 <h4><strong> ${unixDate}</strong> <img src = "${iconURL}" class ="icon-ig" alt = "weahter-icon"></h4> 
-                                <p><strong>Temperature: ${dayData.main.temp}  ℃ </p>
+                                <p><strong>Temperature: ${dayData.main.temp}  ℃ </strong></p>
                                 <p><strong>Humidity: ${dayData.main.humidity}%</strong></p>
-                                <p><strong>Wind Speed:</strong> ${dayData.wind.speed} m/s </strong></p>
+                                <p><strong>Wind Speed: ${dayData.wind.speed} m/s </strong></p>
                             </div>
                         `);
                         // Append weather div to weather row
