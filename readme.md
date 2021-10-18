@@ -28,7 +28,7 @@ The user then searches for a city and will be displayed with the current weather
 
 The search result needs to be stored in local storage so if the user refreshes the applicaton, the search histories are still there. 
 
-[!store](assets/images/store.png)
+![store](assets/images/store.png)
 
 ## Features
 There are a number of features that were used to complete this project. <br>
