@@ -44,7 +44,7 @@ function getData(city) {
                 let cityWind = $("<p>");
                 //setting the text of h3 and p
                 cityName.text('Currently in ' + data.name)
-                cityTemp.text('Tempterature: ' + data.main.temp + ' ℃')
+                cityTemp.text('Tempterature: ' + data.main.temp + '℃')
                 console.log(cityTemp.text())
                 cityHumidity.text('Humidity: ' + data.main.humidity + '%')
                 cityWind.text('Wind Speed: ' + data.wind.speed + 'm/s')
@@ -157,7 +157,7 @@ function fiveDayForecast(city) {
                         let weatherCol = $(`
                             <div class="col mx-2" id="day-forecast">
                                 <h4><strong> ${unixDate}</strong> <img src = "${iconURL}" class ="icon-ig" alt = "weahter-icon"></h4> 
-                                <p><strong>Temperature: ${dayData.main.temp}  ℃ </strong></p>
+                                <p><strong>Temp: ${dayData.main.temp}℃ </strong></p>
                                 <p><strong>Humidity: ${dayData.main.humidity}%</strong></p>
                                 <p><strong>Wind Speed: ${dayData.wind.speed} m/s </strong></p>
                             </div>
