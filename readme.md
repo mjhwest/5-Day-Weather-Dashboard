@@ -42,4 +42,11 @@ There are a number of features that were used to complete this project. <br>
 -Moment.js <br>
 <br>
 -JQuery <br>
+  
+  ##License 
+  MIT License
+
+Copyright (c) 2021 Michael West
+
+
 
